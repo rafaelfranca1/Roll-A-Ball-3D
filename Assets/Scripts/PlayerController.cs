@@ -34,10 +34,30 @@ public class PlayerController : MonoBehaviour
     {
         countText.text = "Count: " + count.ToString();
 
-        if(count >= 12)
+        if (count >= 12)
         {
             winTextObject.SetActive(true);
+            Destroy(GameObject.FindGameObjectWithTag("Enemy"));
+
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            CameraController cameraController = Object.FindFirstObjectByType<CameraController>();
+            if (cameraController != null)
+            {
+                cameraController.enabled = false;
+            }
+            Destroy(gameObject);
+
+            winTextObject.gameObject.SetActive(true);
+            winTextObject.GetComponent<TextMeshProUGUI>().text = "You Lose!";
+
+        }
+
     }
 
     void FixedUpdate()
@@ -49,7 +69,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("PickUp")){
+        if (other.gameObject.CompareTag("PickUp"))
+        {
             other.gameObject.SetActive(false);
             count++;
 
