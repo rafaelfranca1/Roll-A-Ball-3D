@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scripts/UIToolKit/text_stylesheets.uss?fileID=7433441132597879392&amp;guid=7daad87d4394b9e4c89cf4bb85c78030&amp;type=3#text_stylesheets" />
+    <ui:GroupBox name="MainGroupBox" style="height: 321px; -unity-text-align: middle-left; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;">
+        <ui:GroupBox name="TextGroupBox" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; height: 297px;">
+            <ui:Label text="Score: 0" name="scoretxt" tabindex="0" focusable="false" style="font-size: 30px; -unity-text-align: middle-left; -unity-font-style: bold; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+            <ui:Label text="winlose" name="winlosetxt" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; height: 183px; -unity-text-align: middle-center; font-size: 50px;" />
+        </ui:GroupBox>
+    </ui:GroupBox>
+</ui:UXML>

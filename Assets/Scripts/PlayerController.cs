@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,14 +13,26 @@ public class PlayerController : MonoBehaviour
     private float movementX;
     private float movementY;
     private int count;
+    private Label scoreText;
+    private Label winLoseText;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         count = 0;
+
+        var uiDocument = Object.FindFirstObjectByType<UIDocument>();
+        if (uiDocument != null)
+        {
+            var root = uiDocument.rootVisualElement;
+            scoreText = root.Q<Label>("scoretxt"); 
+            winLoseText = root.Q<Label>("winlosetxt");
+
+            winLoseText.style.display = DisplayStyle.None;
+        }
+
         SetCountText();
-        winTextObject.SetActive(false);
     }
 
     void OnMove(InputValue value)
@@ -32,11 +45,18 @@ public class PlayerController : MonoBehaviour
 
     void SetCountText()
     {
-        countText.text = "Count: " + count.ToString();
+        if (scoreText != null)
+        {
+            scoreText.text = "Score: " + count.ToString();
+        }
 
         if (count >= 12)
         {
-            winTextObject.SetActive(true);
+            if (winLoseText != null)
+            {
+                winLoseText.text = "You Win!";
+                winLoseText.style.display = DisplayStyle.Flex;
+            }
             Destroy(GameObject.FindGameObjectWithTag("Enemy"));
 
         }
@@ -53,8 +73,11 @@ public class PlayerController : MonoBehaviour
             }
             Destroy(gameObject);
 
-            winTextObject.gameObject.SetActive(true);
-            winTextObject.GetComponent<TextMeshProUGUI>().text = "You Lose!";
+            if (winLoseText != null)
+            {
+                winLoseText.text = "You Lose!";
+                winLoseText.style.display = DisplayStyle.Flex;
+            }
 
         }
 
